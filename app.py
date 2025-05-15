@@ -74,10 +74,10 @@ def sell_book():
     sell_price = data['quantity'] * book_price * 1.5
     cur.execute("UPDATE books SET quantity = ? WHERE name = ?", (new_qty, data['name']))
 
-    cur.execute("INSERT INTO sales (book, quantity, customer, customer_number, sell_price, date)
-                 VALUES (?, ?, ?, ?, ?, ?)",
-                (data['name'], data['quantity'], data['customer'], data['customer_number'],
-                 sell_price, datetime.today().strftime('%Y-%m-%d')))
+   cur.execute("""INSERT INTO sales (book, quantity, customer, customer_number, sell_price, date)
+               VALUES (?, ?, ?, ?, ?, ?)""",
+            (data['name'], data['quantity'], data['customer'], data['customer_number'],
+             sell_price, datetime.today().strftime('%Y-%m-%d')))
 
     conn.commit()
     conn.close()
