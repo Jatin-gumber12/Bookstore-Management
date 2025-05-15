@@ -10,7 +10,6 @@ CORS(app)
 def connect_db():
     return sqlite3.connect("bookstore.db")
 
-@app.before_first_request
 def init_db():
     conn = connect_db()
     cur = conn.cursor()
